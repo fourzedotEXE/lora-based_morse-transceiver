@@ -10,7 +10,6 @@ Consists of two devices:
 - LoRa Module SX1278 2x
 - 360 Degree Rotary Encoder (CYT1100)
 - Push Button
-- Blue LED
 - 3.7V 1100mAh Lithium Rechargeable Battery
 - TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
 - Micro Slide Switch (SS12F15)
@@ -26,7 +25,10 @@ Consists of two devices:
 - Allow the transceiver to search for the main device before attempting to communicate
 
 ### How to operate
-- The device uses an encoder to scroll select characters through a keyboard shown on the main display
+- The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
 - Sent and received messages are seen on the secondary display
-- The device will automatically connect to the LoRa end-point as soon as it is discoverable (Successful connection will be indicated by the blue LED on the transceiver)
-- Use the push-button to transmit a message once you are finished typing
+- The transceiver will automatically connect to the LoRa P2P as soon as it is discoverable
+  - Successful connection will be indicated by a pop-up message on the seconary display of the transceiver
+  - The serial monitor from the main device will also notify that a connection has been established
+- Use the push-button to transmit a message from the transceiver
+- Type into the serial monitor to transmit a message from the main device
