@@ -13,7 +13,9 @@ Consists of two devices:
 - 3.7V 1100mAh Lithium Rechargeable Battery
 - TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
 - Micro Slide Switch (SS12F15)
-- A computer with Arduino IDE or Platform.io
+- A computer + monitor with Arduino IDE or Platform.io
+- 128x64 OLED LCD Display Module SSD1309 7 Pin SPI/IIC I2C
+- I2C OLED Display Module 0.91 Inch I2C SSD1306 OLED
 
 
 ### Installation
