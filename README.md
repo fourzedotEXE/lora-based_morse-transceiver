@@ -1,5 +1,5 @@
-# morse-communicator
-LoRa-based morse transceiver for stealthy communication. Consists of two devices: 
+# LoRa-based morse transceiver for stealthy communication. 
+Consists of two devices: 
 1) The main device hooked up to a computer, and controlled via serial monitor on an IDE
 2) The LoRa transceiver. Standalone device
 
@@ -12,7 +12,6 @@ LoRa-based morse transceiver for stealthy communication. Consists of two devices
 - 3.7V 1100mAh Lithium Rechargeable Battery
 - TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
 - Micro Slide Switch (SS12F15)
-- 
 - A computer with Arduino IDE or Platform.io
 
 
