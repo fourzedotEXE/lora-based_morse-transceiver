@@ -1,4 +1,5 @@
-# LoRa-based morse transceiver for stealthy communication. 
+# LoRa-based morse transceiver for stealthy communication. :busts_in_silhouette:
+
 Consists of two devices: 
 1) The main device hooked up to a computer, and controlled via serial monitor on an IDE
 2) The LoRa transceiver. Standalone device
