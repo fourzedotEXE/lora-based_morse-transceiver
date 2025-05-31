@@ -1,8 +1,8 @@
-# LoRa-based morse transceiver for stealthy long-range comms. :busts_in_silhouette:
+# LoRa morse transceiver for stealthy long range comms. :busts_in_silhouette:
 
 Consists of two devices: 
 1) The main device hooked up to a computer, and controlled via serial monitor on an IDE
-2) The LoRa transceiver. Standalone device
+2) The LoRa transceiver. Standalone device.
 
 ### Components ( :warning: NOTE: Some soldering may be necessary :warning: )
 - Arduino Uno
