@@ -20,6 +20,7 @@ Consists of two devices:
 
 ### Installation
 - Download the .ino scripts as a part of this repository
+- Install the required libraries as defined by each of the scripts
 - Use the Arduino IDE or Platform.io w/VSCode in order to upload the .ino scripts to both the transceiver and the main devices
 - Make sure the transceiver is properly charged and power on
 - Allow the transceiver to search for the main device before attempting to communicate
