@@ -15,6 +15,9 @@
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
+#define MORSE_TRANSMIT 4
+#define BUZZER 6
+
 #define OLED_MOSI   9
 #define OLED_CLK   10
 #define OLED_DC    11
@@ -24,11 +27,6 @@
 #define FRAME_DELAY (42)
 #define FRAME_WIDTH (128)
 #define FRAME_HEIGHT (64)
-
-#define MORSE_TABLE_LEN (38)
-#define MORSE_WORD_LEN (6)
-#define MORSE_TRANSMIT 4
-#define BUZZER 6
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
@@ -45,7 +43,6 @@ int Old_Position=0;
 int Letter_Entered=0;
 int Transmit=0;
 String To_Transmit="";
-String To_Morse="";
 
 //track current keyboard in use (mode 0-3)
 bool keyboard = 0;
@@ -59,17 +56,6 @@ char Numbers[28]="1234567890.               #";
 char u_Letters[28]="abcdefghijklmnopqrstuvwxyz|";
 char a_Symbols[28]="1234567890!?,.@#$%^&*()_-+|";
 char b_Symbols[28]=":;=~`{}[]\/<>             |";
-
-// morse characters
-char morseTable[MORSE_TABLE_LEN][MORSE_WORD_LEN] = {
-  ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..",     // A-I
-  ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.",    // J-R
-  "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..",            // S-Z
-  ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----", //1-0
-  ".-.-.-" //period
-};
-
-char morseMap[MORSE_TABLE_LEN]="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.";
 
 const int dot_time = 200;
 const int dash_time = 600;
@@ -193,7 +179,7 @@ void A_RISE(){
  pulses++;//moving forward
  if(B_SIG==1)
  pulses--;//moving reverse
- Serial.println(pulses);
+ //Serial.println(pulses);
  attachInterrupt(0, A_FALL, FALLING);
 }
 
@@ -206,7 +192,7 @@ void A_FALL(){
  pulses++;//moving forward
  if(B_SIG==0)
  pulses--;//moving reverse
- Serial.println(pulses);
+ //Serial.println(pulses);
  attachInterrupt(0, A_RISE, RISING);  
 }
 
@@ -219,7 +205,7 @@ void B_RISE(){
  pulses++;//moving forward
  if(A_SIG==0)
  pulses--;//moving reverse
- Serial.println(pulses);
+ //Serial.println(pulses);
  attachInterrupt(1, B_FALL, FALLING);
 }
 
@@ -232,25 +218,9 @@ void B_FALL(){
  pulses++;//moving forward
  if(A_SIG==1)
  pulses--;//moving reverse
- Serial.println(pulses);
+ //Serial.println(pulses);
  attachInterrupt(1, B_RISE, RISING);
 }
-
-
-/*
-ISR(PCINT2_vect){
-  PCIFR |= (1 << PCIF2);  // Clear the interrupt flag
-  if (buttonState == 0){
-    Serial.println("BUTTON PRESSED");
-    Add_To_String();
-    buttonState = 1;
-    Letter_Entered = 1;
-  } else {
-    buttonState = 0;
-    Letter_Entered = 0;
-  }
-}    // Port D, PCINT16 - PCINT23
-*/
 
 volatile bool button4Pressed = false;
 volatile bool button5Pressed = false;
@@ -263,7 +233,7 @@ ISR(PCINT2_vect) {
   if ((currentTime - lastInterruptTime4 > debounceDelay)) {
     bool state4 = digitalRead(4);
     if (state4 == LOW && !button4Pressed) {
-      Serial.println("TRANSMISSION");
+      //Serial.println("TRANSMISSION");
       transmit_now = 1;
       //morse_translate(To_Transmit);
       //delay(dot_time);
@@ -278,7 +248,7 @@ ISR(PCINT2_vect) {
    if ((currentTime - lastInterruptTime5 > debounceDelay)) {
      bool state5 = digitalRead(5);
      if (state5 == LOW && !button5Pressed) {
-      Serial.println("BUTTON PRESSED");
+      //Serial.println("BUTTON PRESSED");
       Add_To_String();
       buttonState = 1;
       Letter_Entered = 1;
@@ -289,36 +259,6 @@ ISR(PCINT2_vect) {
     lastInterruptTime5 = currentTime;
   }
 }
-
-//function that translates the inputted text to morse code
-/*
-void morse_translate(String input){
-  int string_length = input.length();
-  
-  for(int i=0;i<string_length;i++){
-    for(int j=0;j<MORSE_TABLE_LEN;j++){
-      if(morseMap[j] == input[i]){  //check if the letters match
-        for(int x=0;x<MORSE_WORD_LEN;x++){
-
-          if(morseTable[j][x] == '.') {
-
-            digitalWrite(BUZZER, HIGH);
-            delay(dot_time);
-
-          } else if (morseTable[j][x] == '-') {
-
-            digitalWrite(BUZZER, HIGH);
-            delay(dash_time);
-
-          }
-          digitalWrite(BUZZER, LOW);
-          delay(dot_time);
-        }
-      }
-    }
-    delay(dash_time);  //space between letter inputs are 600ms
-  }
-}*/
 
 //do loop
 void loop() {
@@ -346,16 +286,16 @@ void loop() {
   delay(5);
 
   //debugging statements
-  Serial.print("LetterEntered: \n");
-  Serial.println(Letter_Entered);
+  //Serial.print("LetterEntered: \n");
+  //Serial.println(Letter_Entered);
 
-  Serial.print("String: \n");
-  Serial.println(To_Transmit);
+  //Serial.print("String: \n");
+  //Serial.println(To_Transmit);
 
   // If letter was entered add the letter to To_Transmit and output it on the display
   if (Letter_Entered==1){
     if (Letters[New_Position] == '#'){
-      Serial.println("SWITCHING KEYBOARDS");
+      //Serial.println("SWITCHING KEYBOARDS");
       keyboard = !(keyboard);
       update_keys(keyboard);
 
@@ -374,8 +314,8 @@ void loop() {
       }
 
       char_counter++;
-      Serial.print("char_counter: \n");
-      Serial.print(char_counter);
+      //Serial.print("char_counter: \n");
+      //Serial.print(char_counter);
 
       display.setCursor(3,0);
       display.setTextColor(BLACK);
@@ -387,37 +327,19 @@ void loop() {
       } else {
         display.println(To_Transmit);
       }
-      display.display();
     }
   } else if (transmit_now == 1) {
 
     //------------------------------------------
-    for(int i=0;i<char_counter;i++){
-      for(int j=0;j<MORSE_TABLE_LEN;j++){
-        if(morseMap[j] == To_Transmit[i]){  //check if the letters match
-          for(int x=0;x<MORSE_WORD_LEN;x++){
 
-            if(morseTable[j][x] == '.') {
-              //To_Morse + '.';
-            } else if (morseTable[j][x] == '-') {
-              //To_Morse + '-';
-            } else {
-              //To_Morse + '-';
-            }
-          }
-        }
-      }
-      delay(dash_time);  //space between letter inputs are 600ms
-    }
+    Serial.println("Ahab: " + To_Transmit);
     To_Transmit="";
 
     //------------------------------------------
     transmit_now = 0;
     char_counter=0;
-    Serial.println("PLAYING TRANSMISSION");
-    display.display();
   }
-
+  display.display();
   Letter_Entered=0;
   delay(100);
 }
