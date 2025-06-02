@@ -33,3 +33,6 @@ Consists of two devices:
   - The serial monitor from the main device will also notify that a connection has been established
 - Use the push-button to transmit a message from the transceiver
 - Type into the serial monitor to transmit a message from the main device
+
+### Remaning Issues :warning:
+- Text on the secondary screen can get cutoff if the message is too long
