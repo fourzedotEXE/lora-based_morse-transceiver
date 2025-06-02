@@ -25,6 +25,9 @@ The system consists of two devices:
 - Make sure the transceiver is properly charged and power on
 - Allow the transceiver to search for the main device before attempting to communicate
 
+### Libraries Used
+- https://github.com/sandeepmistry/arduino-LoRa
+
 ### How to operate
 - The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
 - Sent and received messages are seen on the secondary display
