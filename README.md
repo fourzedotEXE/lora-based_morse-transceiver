@@ -1,4 +1,4 @@
-# LoRa morse transceiver for stealthy long range comms. :busts_in_silhouette:
+# LoRa morse transceiver for stealthy long range comms.
 
 The system consists of two devices: 
 1) The main device hooked up to a computer, and controlled via serial monitor on an IDE
