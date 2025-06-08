@@ -38,4 +38,5 @@ The system consists of two devices:
 - Type into the serial monitor to transmit a message from the main device
 
 ### Remaning Issues :warning:
-- Text on the secondary screen can get cutoff if the message is too long
+- Message transmission on the tranceiver is inconsistent only on start-up
+  - Solution: Send an initial dummy message when starting the transceiver
