@@ -25,8 +25,10 @@ The system consists of two devices:
 - Allow the transceiver to search for the main device before attempting to communicate
 
 ### Libraries Used
-- https://github.com/sandeepmistry/arduino-LoRa
-- https://github.com/suculent/thinx-aes-lib
+- LoRa Interfacing Library
+  - https://github.com/sandeepmistry/arduino-LoRa
+- CBC Encryption for Low-memory devices
+  - https://github.com/suculent/thinx-aes-lib
 
 ### How to operate
 - The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
