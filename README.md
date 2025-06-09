@@ -43,5 +43,6 @@ The system consists of two devices:
 - Message transmission on the tranceiver is inconsistent only on start-up
   - Solution: Send an initial dummy message when starting the transceiver
 
-### Regulations :warning:
-- https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
+### Standards and Regulations :warning:
+-United States FCC Regulations
+  - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
