@@ -44,5 +44,5 @@ The system consists of two devices:
   - Solution: Send an initial dummy message when starting the transceiver
 
 ### Standards and Regulations :warning:
--United States FCC Regulations
+- United States FCC Regulations
   - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
