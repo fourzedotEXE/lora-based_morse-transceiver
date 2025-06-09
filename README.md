@@ -26,6 +26,7 @@ The system consists of two devices:
 
 ### Libraries Used
 - https://github.com/sandeepmistry/arduino-LoRa
+- https://github.com/suculent/thinx-aes-lib
 
 ### How to operate
 - The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
