@@ -5,8 +5,7 @@ The system consists of two devices:
 2) The LoRa transceiver. Standalone device.
 
 ### Components ( :warning: NOTE: Some soldering may be necessary :warning: )
-- Arduino Uno
-- Arduino Nano 2x
+- Arduino Nano 3x (2 for the transceiver, 1 for the main device)
 - LoRa Module SX1278 2x
 - 360 Degree Rotary Encoder (CYT1100)
 - Push Button
