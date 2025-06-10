@@ -6,7 +6,7 @@ The system consists of two devices:
 
 ### Components ( :warning: NOTE: Some soldering may be necessary :warning: )
 - Arduino NANO or UNO 3x (2 for the transceiver, 1 for the main device)
-- LoRa Module SX1278 2x
+- LoRa Module SX1276 2x (MUST OPERATE AT 915MHZ, DO NOT MISTAKE WITH SX1278 MODULES)
 - 360 Degree Rotary Encoder (CYT1100)
 - Push Button
 - 3.7V 1100mAh Lithium Rechargeable Battery
@@ -16,6 +16,8 @@ The system consists of two devices:
 - 128x64 OLED LCD Display Module SSD1309 7 Pin SPI/IIC I2C
 - I2C OLED Display Module 0.91 Inch I2C SSD1306 OLED
 - Breadboard Jumper wires
+- 3D Printer for enclosure (STL File included in the repo)
+- Soldering (KiCad Schematics included in the repo)
 
 ### Installation
 - Download the .ino scripts as a part of this repository
@@ -44,5 +46,5 @@ The system consists of two devices:
   - Solution: Send an initial dummy message when starting the transceiver
 
 ### Standards and Regulations :warning:
-- United States FCC Regulations
+- United States FCC Regulations : radio operations @ 915Mhz for unliscensed users
   - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
