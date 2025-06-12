@@ -38,7 +38,7 @@ The system consists of two devices:
 ### How to operate
 - The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
 - Sent and received messages are seen on the secondary display
-- The transceiver will automatically connect to the LoRa P2P as soon as it is discoverable
+- The transceiver will automatically connect to LoRa P2P as soon as it is discoverable
   - Successful connection will be indicated by a pop-up message on the seconary display of the transceiver
   - The serial monitor from the main device will also notify that a connection has been established
 - Use the push-button to transmit a message from the transceiver
