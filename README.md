@@ -4,12 +4,13 @@ The system consists of two devices:
 1) The main device hooked up to a computer, and controlled via serial monitor on an IDE
 2) The LoRa transceiver. Standalone device.
 
-### Components ( :warning: NOTE: Some soldering may be necessary :warning: )
+### Components and Tools ( :warning: NOTE: Some soldering may be necessary :warning: )
 - Arduino NANO or UNO 3x (2 for the transceiver, 1 for the main device)
 - LoRa Module SX1276 2x (MUST OPERATE AT 915MHZ, DO NOT MISTAKE WITH SX1278 MODULES)
 - 360 Degree Rotary Encoder (CYT1100)
 - Push Button
-- 3.7V 1100mAh Lithium Rechargeable Battery
+- 3.7V 104245 2000mAh Lithium Ion Polymer Batteries Rechargeable Lipo Battery Pack with PH2.0mm JST
+- MT3608 DC-DC Step Up Boost Power Converter Adjustable 2A Module Step Up Voltage Regulator Board Input 2-24V to Output 5V-28V
 - TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
 - Micro Slide Switch (SS12F15)
 - A computer + monitor with Arduino IDE or Platform.io
@@ -17,7 +18,7 @@ The system consists of two devices:
 - I2C OLED Display Module 0.91 Inch I2C SSD1306 OLED
 - Breadboard Jumper wires
 - 3D Printer for enclosure (STL File included in the repo)
-- Soldering (KiCad Schematics included in the repo)
+- Soldering (KiCad Schematic included in the repo)
 
 ### Installation
 - Download the .ino scripts as a part of this repository
