@@ -5,17 +5,17 @@ The system consists of two devices:
 2) The LoRa transceiver. Standalone device.
 
 ### Components and Tools ( :warning: NOTE: Some soldering may be necessary :warning: )
-- Arduino NANO or UNO 3x (2 for the transceiver, 1 for the main device)
-- LoRa Module SX1276 2x (MUST OPERATE AT 915MHZ, DO NOT MISTAKE WITH SX1278 MODULES)
-- 360 Degree Rotary Encoder (CYT1100)
-- Push Button
-- 3.7V 104245 2000mAh Lithium Ion Polymer Batteries Rechargeable Lipo Battery Pack with PH2.0mm JST
-- MT3608 DC-DC Step Up Boost Power Converter Adjustable 2A Module Step Up Voltage Regulator Board Input 2-24V to Output 5V-28V
-- TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
-- Micro Slide Switch (SS12F15)
+- 3x Arduino NANO or UNO (2 for the transceiver, 1 for the main device)
+- 2x LoRa Module SX1276 (MUST OPERATE AT 915MHZ, DO NOT MISTAKE WITH SX1278 MODULES)
+- 1x 360 Degree Rotary Encoder (CYT1100)
+- 1x Push Button
+- 1x 3.7V 104245 2000mAh Lithium Ion Polymer Batteries Rechargeable Lipo Battery Pack with PH2.0mm JST
+- 1x MT3608 DC-DC Step Up Boost Power Converter Adjustable 2A Module Step Up Voltage Regulator Board Input 2-24V to Output 5V-28V
+- 1x TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
+- 1x Micro Slide Switch (SS12F15)
+- 1x 128x64 OLED LCD Display Module SSD1309 7 Pin SPI/IIC I2C
+- 1x I2C OLED Display Module 0.91 Inch I2C SSD1306 OLED
 - A computer + monitor with Arduino IDE or Platform.io
-- 128x64 OLED LCD Display Module SSD1309 7 Pin SPI/IIC I2C
-- I2C OLED Display Module 0.91 Inch I2C SSD1306 OLED
 - Breadboard Jumper wires
 - 3D Printer for enclosure (STL File included in the repo)
 - Soldering (KiCad Schematic included in the repo)
