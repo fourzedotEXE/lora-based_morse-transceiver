@@ -6,7 +6,7 @@ The system consists of two devices:
 
 ### Components and Tools ( :warning: NOTE: Some soldering may be necessary :warning: )
 - 3x Arduino NANO or UNO (2 for the transceiver, 1 for the main device)
-- 2x LoRa Module SX1276 (MUST OPERATE AT 915MHZ, DO NOT MISTAKE WITH SX1278 MODULES)
+- 2x LoRa Module RYLR896 SX1276 (MUST OPERATE AT 915MHZ, DO NOT MISTAKE WITH SX1278 MODULES)
 - 1x 360 Degree Rotary Encoder (CYT1100)
 - 1x Push Button
 - 1x 3.7V 104245 2000mAh Lithium Ion Polymer Batteries Rechargeable Lipo Battery Pack with PH2.0mm JST
