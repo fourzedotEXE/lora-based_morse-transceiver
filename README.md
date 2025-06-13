@@ -11,6 +11,7 @@ The system consists of two devices:
 - 1x Push Button
 - 1x 3.7V 104245 2000mAh Lithium Ion Polymer Batteries Rechargeable Lipo Battery Pack with PH2.0mm JST
 - 1x MT3608 DC-DC Step Up Boost Power Converter Adjustable 2A Module Step Up Voltage Regulator Board Input 2-24V to Output 5V-28V
+- 1x LM2596 LM2596S DC-DC Step Down Variable Volt Regulator Input 3.0-40V Output 1.5-35V (Other step-down buck converters are sufficient; These are just the ones I had handy)
 - 1x TP4056 Type-c USB 5V 1A 18650 Lithium Battery Charger Module
 - 1x Micro Slide Switch (SS12F15)
 - 1x 128x64 OLED LCD Display Module SSD1309 7 Pin SPI/IIC I2C
