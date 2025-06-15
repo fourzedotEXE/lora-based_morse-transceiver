@@ -57,5 +57,5 @@ The system consists of two devices:
  
 ### Potential Improvements going forward...
 - Create smaller devicec footprint by creating custom PCB to contain essential electronics
-- Use more sophisticated debouce methedology
+- Use more sophisticated debouce methodology
 - Use a higher memory microcontroller architecture
