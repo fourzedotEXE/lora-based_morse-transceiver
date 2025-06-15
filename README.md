@@ -48,7 +48,7 @@ The system consists of two devices:
 - Type into the serial monitor to transmit a message from the main device
 
 ### Remaning Issues :warning:
-- Message transmission on the tranceiver is inconsistent only on start-up
+- Message transmission on the tranceiver is inconsistent only on start-up (software-related)
   - Solution: Send an initial dummy message when starting the transceiver
 
 ### Standards and Regulations :warning:
