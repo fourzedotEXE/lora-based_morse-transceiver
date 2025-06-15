@@ -1,0 +1,1 @@
+kicad proj folder for morse transceiver device 6/14/25
