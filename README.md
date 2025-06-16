@@ -50,6 +50,8 @@ The system consists of two devices:
 ### Remaning Issues :warning:
 - Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
   - Solution: Send an initial dummy message when starting the transceiver
+- Debounce on rotary encoder is still somewhat inconsistent
+  - Solution: Debounce capacitor C3 on the schematic may perform better at 100nF instead of 10nF. Further testing is required.
 
 ### Standards and Regulations :warning:
 - United States FCC Regulations : radio operations @ 915Mhz for unliscensed users
@@ -59,4 +61,3 @@ The system consists of two devices:
 - Create smaller devicec footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
 - Use a higher memory microcontroller architecture
-- Debounce capacitor C3 on the schematic may perform better at 100nF instead of 10nF. Further testing is required.
