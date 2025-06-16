@@ -59,3 +59,4 @@ The system consists of two devices:
 - Create smaller devicec footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
 - Use a higher memory microcontroller architecture
+- C3 on the schematic may have a better value (100nF instead of 10nf). Further testing is required.
