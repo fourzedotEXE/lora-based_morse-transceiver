@@ -50,7 +50,7 @@ The system consists of two devices:
 ### Remaning Issues :warning:
 - Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
   - Solution: Send an initial dummy message when starting the transceiver
-- Debounce on rotary encoder is still somewhat inconsistent
+- Debounce on rotary encoder push-button is still somewhat inconsistent
   - Solution: Debounce capacitor C3 on the schematic may perform better at 100nF instead of 10nF. Further testing is required.
 
 ### Standards and Regulations :warning:
