@@ -66,6 +66,6 @@
   - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
  
 ### Potential Improvements going forward...
-- Create smaller devicec footprint by creating custom PCB to contain essential electronics
+- Create smaller device footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
-- Use a higher memory microcontroller architecture
+- Use a higher memory microcontroller architecture to reduce the need for several MCUs
