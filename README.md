@@ -1,6 +1,6 @@
 # LoRa-base morse-transceiver for stealthy long range comms.
 
-Primary goals:
+### Primary goals:
 1) To leverage the use of the LoRa communication protocol in order to allow for long range communication for cheap and with minimal hardware overhead
 2) Demonstrate the securing of P2P (Peer-to-Peer) communication under LoRa without the use of an external network by way of AES256 encryption libraries utilized in C
 3) Prototype a low-cost device using over-the-counter MCUs
@@ -8,7 +8,7 @@ Primary goals:
    - Harnessing the capabilities of hardware interrupts for push-button controls
    - Applying concepts of electrical engineering and computer science to utilize several different technologies (OLED Displays, Rotary encoders, step-up and step-down transformers, LoRa Modules)
 
-The system consists of two devices: 
+### The system consists of two devices: 
 1) The main device hooked up to a computer, and controlled via serial monitor on an IDE
 2) The LoRa transceiver. Standalone device.
 
