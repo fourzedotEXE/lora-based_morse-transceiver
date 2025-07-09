@@ -3,7 +3,8 @@
 ### Primary goals ✔️
 1) To leverage the use of the LoRa communication protocol in order to allow for long range communication for cheap and with minimal hardware overhead
 2) Demonstrate the securing of P2P (Peer-to-Peer) communication under LoRa without the use of an external network by way of AES256 encryption libraries utilized in C
-3) Prototype a low-cost device using over-the-counter MCUs
+  - Note that the encryption mode is only EBC for demonstration purposes, and thus encrypted bytes can reveal patterns in messages. To ensure security, utilize CBC encryption on your own accord.
+4) Prototype a low-cost device using over-the-counter MCUs
    - Utilizing UART, I2C, and SPI communicationin the system
    - Harnessing the capabilities of hardware interrupts for push-button controls
    - Applying concepts of electrical engineering and computer science to utilize several different technologies (OLED Displays, Rotary encoders, step-up and step-down transformers, LoRa Modules)
