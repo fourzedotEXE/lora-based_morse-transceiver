@@ -68,4 +68,5 @@
 ### Potential Improvements going forward...
 - Create smaller device footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
+- Create a dedicated housing in Fusion 360
 - Use a higher memory microcontroller architecture to reduce the need for several MCUs
