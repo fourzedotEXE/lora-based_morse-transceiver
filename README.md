@@ -64,8 +64,17 @@
 ### Standards and Regulations :warning:
 - United States FCC Regulations : radio operations @ 915Mhz for unliscensed users
   - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
- 
+
+### Results
+- Ultimately, the device was successful in communicating morse code to english text over LoRa. However, the final aes-256 encryption could not be accomodated due to the lack of dynamic memory on the Arduino MCU.
+- The device is not necessarily secure in communicating over long distances but for proof-of-concept, it is possible to interally encrypt and decrypt data within a single Arduino. Said differently, you can make the arduino encrypt its own data and and decrypt it as well. The only difference is had it been implemented with the LoRa functionality, the encryption would happen on one device and the decryption would happen on the other, with the extra step of transmitting the data over LoRa.
+- Lessons learned:
+  - Designing hardware at a system level
+  - Using concepts learned in university to achieve a goal (circuit analysis, data types in C, embedded systems knowledge, signals and systems)
+  - Arduino is a hobbyist-platform and you are severly limited to what you can do with just a single Arduino MCU
+
 ### Potential Improvements going forward...
+- Use an MCU with more memory (i.e. ESP32)
 - Create smaller device footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
 - Create a dedicated housing in Fusion 360
