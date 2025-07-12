@@ -7,7 +7,14 @@
     \|__|     \|_______|\|___| \__\|_______|\|_______|\|_______|
                               \|__|                             
                   Main Device (Hook up to PC)  
-*/                                             
+*/
+
+/*
+THIS IS AN UNFINISHED, UNTESTED VERSION OF THE MAIN DEVICE ARDUINO.
+THIS CODE DOES NOT RUN ON ARDUINO, BUT CONTAINS THE CODE FOR ENCRYPTION AND
+DECRYPTION OF MESSAGES
+*/
+
 #include <SPI.h>
 #include <AESLib.h>
 #include <SoftwareSerial.h>
