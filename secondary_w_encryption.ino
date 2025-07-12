@@ -178,7 +178,6 @@ byte enc_iv_from[N_BLOCK] = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0x
 
 uint16_t encLen = 0;
 
-/*
 //encrypt the contents of readBuffer using the shared key and iv
 String encryption_layer(unsigned char* readBuffer, int len){
   //Serial.print("readBuffer length: "); Serial.println(sizeof(readBuffer));
@@ -244,7 +243,6 @@ String decryption_layer(String hex_data){
   free(readBuffer);
   readBuffer = NULL;
 }
-*/
 
 String byteArrayToHex(const byte* data, int len) {
   String hex = "";
