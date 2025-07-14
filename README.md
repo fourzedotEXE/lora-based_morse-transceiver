@@ -61,7 +61,7 @@
 
 ### Results
 - Ultimately, the device was successful in communicating morse code to english text over LoRa. However, the final aes-256 encryption could not be accomodated due to the lack of dynamic memory on the Arduino MCU.
-- The device is not necessarily secure in communicating over long distances but for proof-of-concept, it is possible to internally encrypt and decrypt data on a single Arduino. Said differently, you can modify the encryption code so that the arduino encrypts its own data and decrypts it as well. The only difference is had it been implemented with the LoRa functionality, the encryption would happen on one device and the decryption would happen on the other, with the extra step of transmitting the data over LoRa.
+- The device is not necessarily secure in communicating over long distances but for proof-of-concept, it is possible to internally encrypt and decrypt data on a single Arduino. Said differently, you can modify the encryption code so that the arduino encrypts its own data and decrypts it as well. The only difference is had it been implemented with the LoRa functionality, the encryption would happen on one device and the decryption would happen on the other, with the extra step of transmitting the encrypted data over LoRa.
 - Lessons learned:
   - Designing hardware at a system level
   - Using concepts learned in university to achieve a goal (circuit analysis, data types in C, embedded systems knowledge, signals and systems)
