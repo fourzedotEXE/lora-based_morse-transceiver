@@ -77,8 +77,7 @@
     - Could potentially be a hardware related issue, with either the Arduinos themsevles, or the RYLR896 LoRa module. Further testing required.
 
 ### Potential Improvements going forward...
-- Use an MCU with more memory (i.e. ESP32)
+- Use an MCU with more memory (i.e. ESP32) to reduce the need for several MCUs
 - Create smaller device footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
 - Create a dedicated housing in Fusion 360
-- Use a higher memory microcontroller architecture to reduce the need for several MCUs
