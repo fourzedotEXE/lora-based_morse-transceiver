@@ -38,12 +38,6 @@
 - Make sure the transceiver is properly charged and power on
 - Allow the transceiver to search for the main device before attempting to communicate
 
-### Libraries Used / Referenced Sources
-- CBC Encryption for Low-memory devices
-  - https://github.com/suculent/thinx-aes-lib
-- 3D Printed Housing Model
-  - https://www.printables.com/model/1113713-klipper-case/files
-
 ### How to operate
 - The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
 - Sent and received messages are seen on the secondary display
@@ -77,3 +71,9 @@
 - Create smaller device footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
 - Create a dedicated housing in Fusion 360
+- 
+### Libraries Used / Referenced Sources
+- CBC Encryption for Low-memory devices
+  - https://github.com/suculent/thinx-aes-lib
+- 3D Printed Housing Model
+  - https://www.printables.com/model/1113713-klipper-case/files
