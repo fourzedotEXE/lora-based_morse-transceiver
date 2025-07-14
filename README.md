@@ -55,12 +55,6 @@
 - Use the push-button to transmit a message from the transceiver
 - Type into the serial monitor to transmit a message from the main device
 
-### Remaning Issues :warning:
-- Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
-  - Solution: Send an initial dummy message when starting the transceiver
-- Debounce on rotary encoder push-button is still somewhat inconsistent
-  - Solution: Debounce capacitor C3 on the schematic may perform better at 100nF instead of 10nF. Further testing is required.
-
 ### Standards and Regulations :warning:
 - United States FCC Regulations : radio operations @ 915Mhz for unliscensed users
   - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
@@ -72,6 +66,15 @@
   - Designing hardware at a system level
   - Using concepts learned in university to achieve a goal (circuit analysis, data types in C, embedded systems knowledge, signals and systems)
   - Arduino is a hobbyist-platform and you are severly limited to what you can do with just a single Arduino MCU
+ 
+### Remaning Issues :warning:
+- Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
+  - Solution: Send an initial dummy message when starting the transceiver
+- Debounce on rotary encoder push-button is still somewhat inconsistent
+  - Solution: Debounce capacitor C3 on the schematic may perform better at 100nF instead of 10nF. Further testing is required.
+- Establishing LoRa communication is inconsistent
+  - Both modules consistently send data over LoRa with the SoftwareSerial.h library, but receiveing messages has proved unreliable.
+    - Could potentially be a hardware related issue, with either the Arduinos themsevles, or the RYLR896 LoRa module. Further testing required.
 
 ### Potential Improvements going forward...
 - Use an MCU with more memory (i.e. ESP32)
