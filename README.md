@@ -50,8 +50,6 @@
 - The transceiver uses an encoder to scroll select characters through a keyboard shown on the main display
 - Sent and received messages are seen on the secondary display
 - The transceiver will automatically connect to LoRa P2P as soon as it is discoverable
-  - Successful connection will be indicated by a pop-up message on the seconary display of the transceiver
-  - The serial monitor from the main device will also notify that a connection has been established
 - Use the push-button to transmit a message from the transceiver
 - Type into the serial monitor to transmit a message from the main device
 
@@ -65,7 +63,7 @@
 - Lessons learned:
   - Designing hardware at a system level
   - Drawing from foundational concepts learned in university to research ways to achieve an engineering goal (circuit analysis, data types in C, embedded systems knowledge, signals and systems)
-  - Arduino is a hobbyist-platform and you are severly limited to what you can do with just a single Arduino MCU
+  - Arduino is a hobbyist-platform and you are severely limited to what you can do with just a single Arduino MCU
  
 ### Remaning Issues :warning:
 - Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
