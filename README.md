@@ -39,8 +39,6 @@
 - Allow the transceiver to search for the main device before attempting to communicate
 
 ### Libraries Used / Referenced Sources
-- LoRa Interfacing Library
-  - https://github.com/sandeepmistry/arduino-LoRa
 - CBC Encryption for Low-memory devices
   - https://github.com/suculent/thinx-aes-lib
 - 3D Printed Housing Model
