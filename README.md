@@ -57,6 +57,9 @@
   - Drawing from foundational concepts learned in university to research ways to achieve an engineering goal (circuit analysis, data types in C, embedded systems knowledge, signals and systems)
   - Arduino is a hobbyist-platform and you are severely limited to what you can do with just a single Arduino MCU
  
+- Sending "HELLO" to the main device hooked up to the PC using the transceiver module (Note how the HELLO is translated to morse on the main device end)
+[![Watch the video]()](https://youtu.be/h2kwZLLiumo)
+ 
 ### Remaning Issues :warning:
 - Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
   - Solution: Send an initial dummy message when starting the transceiver
