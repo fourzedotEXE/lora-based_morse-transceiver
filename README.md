@@ -58,7 +58,7 @@
   - Arduino is a hobbyist-platform and you are severely limited to what you can do with just a single Arduino MCU
  
 - Sending "HELLO" to the main device hooked up to the PC using the transceiver module (Note how the HELLO is translated to morse on the main device end)
-[![Watch the video]()](https://youtu.be/h2kwZLLiumo)
+[![morse_lora_1.mp4]()](https://youtu.be/h2kwZLLiumo)
  
 ### Remaning Issues :warning:
 - Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
