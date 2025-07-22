@@ -50,24 +50,26 @@
   - https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247
 
 ### Results
-- Ultimately, the device was successful in communicating morse code to english text over LoRa. However, the final aes-256 encryption could not be accomodated due to the lack of dynamic memory on the Arduino MCU.
+- Ultimately, the device was only successful in communicating english text to morse code over LoRa (one-way, transceiver to the main device). However, the final aes-256 encryption could not be accomodated due to the lack of dynamic memory on the Arduino MCU.
 - The device is not necessarily secure in communicating over long distances but for proof-of-concept, it is possible to internally encrypt and decrypt data on a single Arduino. Said differently, you can modify the encryption code so that the arduino encrypts its own data and decrypts it as well. The only difference is had it been implemented with the LoRa functionality, the encryption would happen on one device and the decryption would happen on the other, with the extra step of transmitting the encrypted data over LoRa.
 - Lessons learned:
   - Designing hardware at a system level
   - Drawing from foundational concepts learned in university to research ways to achieve an engineering goal (circuit analysis, data types in C, embedded systems knowledge, signals and systems)
-  - Arduino is a hobbyist-platform and you are severely limited to what you can do with just a single Arduino MCU
+  - Better planning prior to deciding on which MCU platform to use for projects moving forward
  
 - Sending "HELLO" to the main device hooked up to the PC using the transceiver module (Note how the HELLO is translated to morse on the main device end)
 [![morse_lora_1.mp4]()](https://youtu.be/h2kwZLLiumo)
  
 ### Remaning Issues :warning:
+- Using a RYLR896 module for LoRa communication is not feasible with this design since it relies on Serial communication which is already being used to communicate between the UNO and NANO on the transceiver. Use a SX1276 module that uses SPI communication
+  - It may be possible to connieve a way to use the RYLR896 in this design, but I decided it was not worth the time and effort
 - Message transmission on the tranceiver is inconsistent only on start-up (software-related issue)
   - Solution: Send an initial dummy message when starting the transceiver
 - Debounce on rotary encoder push-button is still somewhat inconsistent
   - Solution: Debounce capacitor C3 on the schematic may perform better at 100nF instead of 10nF. Further testing is required.
 - Establishing LoRa communication is inconsistent
   - Both modules consistently send data over LoRa with the SoftwareSerial.h library, but receiveing messages has proved unreliable.
-    - Could potentially be a hardware related issue, with either the Arduinos themsevles, or the RYLR896 LoRa module. Further testing required.
+    - Could potentially be a hardware related issue, with either the Arduinos themsevles, or the LoRa module. Further testing required.
 
 ### Potential Improvements going forward...
 - Use an MCU with more memory (i.e. ESP32) to reduce the need for several MCUs
