@@ -74,7 +74,7 @@
 - Create smaller device footprint by creating custom PCB to contain essential electronics
 - Use more sophisticated debouce methodology
 - Create a dedicated housing in Fusion 360
-- 
+
 ### Libraries Used / Referenced Sources
 - CBC Encryption for Low-memory devices
   - https://github.com/suculent/thinx-aes-lib
