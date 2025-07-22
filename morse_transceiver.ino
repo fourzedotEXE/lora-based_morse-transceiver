@@ -1,11 +1,6 @@
-/*
- ______     __  __     ______     ______    
-/\  __ \   /\ \_\ \   /\  __ \   /\  == \   
-\ \  __ \  \ \  __ \  \ \  __ \  \ \  __<   
- \ \_\ \_\  \ \_\ \_\  \ \_\ \_\  \ \_____\ 
-  \/_/\/_/   \/_/\/_/   \/_/\/_/   \/_____/ 
-          Transceiver // FourzeDotEXE
-*/
+//Transceiver - Controls the rotary encoder and big OLED
+//FourzeDotEXE - 5/22/25
+
 #include <avr/interrupt.h>  //lib for Pin Change Interrupts
 #include <SPI.h>
 #include <Wire.h>
@@ -14,6 +9,8 @@
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
+
+#define MAX_VISIBLE_CHARS 10 //maximum number of inputted chars shown on the screen at any time
 
 #define MORSE_TRANSMIT 4
 #define BUZZER 6
@@ -64,12 +61,9 @@ void setup() {
   Serial.begin(9600);
   pulses = 4;
 
-  //define pinmode for morse transmit button and buzzer
   pinMode(MORSE_TRANSMIT, INPUT);
   pinMode(BUZZER, OUTPUT);
-  //digitalWrite(BUZZER, LOW);
 
-  //digital pin 2 and 3 serve as encoder interrupts
   attachInterrupt(0, A_RISE, RISING);
   attachInterrupt(1, B_RISE, RISING);
   
@@ -79,22 +73,13 @@ void setup() {
   PCMSK2 |= 0b00110000;   //Interrupt on Pin 5 and Pin 4 (6th and 5th MSB bit respectively)
   sei();
 
-  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("SSD1306 allocation failed"));
-    for(;;); // Don't proceed, loop forever
+    while(1);
   }
-  //------------------------------------------------------------
-  //initialize SPI OLED
-  // Show initial display buffer contents on the screen --
-  // the library initializes this with an Adafruit splash screen.
-  delay(2000); // Pause for 2 seconds
-  
-  //display.display();
 
-  // Clear the buffer
+  delay(2000);
   display.clearDisplay();
-  
   
   // Display Letter Board 3 rows 9 character in each row 
   display.setTextSize(2);            
@@ -103,41 +88,31 @@ void setup() {
     for (int i=0; i<9;i++){
       display.setCursor(i*12+2*i+1,j*16+17);           
       display.println(Letters[i+j*9]);
-      //display.fillRect(i*12+2*i, j*16 +16, 12, 16, SSD1306_INVERSE);
       display.display();
     }
   }
+
   // Display filled in rect in the top section of the display when To_Transfer would be output
   display.fillRect(0, 0, 128, 15, SSD1306_INVERSE);
   // Highlight character A by displaying Inverse rect at first position
   display.fillRect(0, 16, 12, 16, SSD1306_INVERSE);
-
-  //display.display();
-  //------------------------------------------------------------
-}
-
-void Add_To_String(){
-  Letter_Entered=1;
 }
 
 //highlight the selected letter on the keyboard
 void Highlight_letter(int New_Pos, int Old_Pos){
-  // When position changes from Old_Pos to New_Pos
-  // Draw the inverse rect in the Old_pos to deactivate  the highlight in the old spot
-  // Draw the inverse rect to Highlite the new spot
   int X_pos;
   int Y_pos;
   
   // Calculate X and Y coordinates of the New_Pos on the letter board
   X_pos=New_Pos - ((int)New_Pos/9)*9;
   Y_pos=(int)New_Pos/9;
-  // Displaying Inverse rect
+  // Displaying Inverse rect over the current curson positon
   display.fillRect(X_pos*12+2*X_pos, Y_pos*16 +16, 12, 16, SSD1306_INVERSE);
   
   // Calculate X and Y coordinates of the Old_Pos on the letter board
   X_pos=Old_Pos - ((int)Old_Pos/9)*9;
   Y_pos=(int)Old_Pos/9;
-  // Displaying Inverse rect
+  // Revert the rect over the old cursor position
   display.fillRect(X_pos*12+2*X_pos, Y_pos*16 +16, 12, 16, SSD1306_INVERSE);
   
   display.display();
@@ -167,7 +142,7 @@ void update_keys(bool mode_selected){
     }
   }
 
-  // Display filled in rect in the top section of the display when To_Transfer would be output
+  // Display filled in rect in the top section of the display
   display.fillRect(0, 0, 128, 15, SSD1306_INVERSE);
 }
 void A_RISE(){
@@ -187,12 +162,11 @@ void A_FALL(){
  detachInterrupt(0);
  A_SIG=0;
  
- pulses_prev = pulses; //capture previous pulse count
+ pulses_prev = pulses;
  if(B_SIG==1)
- pulses++;//moving forward
+ pulses++;
  if(B_SIG==0)
- pulses--;//moving reverse
- //Serial.println(pulses);
+ pulses--;
  attachInterrupt(0, A_RISE, RISING);  
 }
 
@@ -200,12 +174,11 @@ void B_RISE(){
  detachInterrupt(1);
  B_SIG=1;
  
- pulses_prev = pulses; //capture previous pulse count
+ pulses_prev = pulses;
  if(A_SIG==1)
- pulses++;//moving forward
+ pulses++;
  if(A_SIG==0)
- pulses--;//moving reverse
- //Serial.println(pulses);
+ pulses--;
  attachInterrupt(1, B_FALL, FALLING);
 }
 
@@ -213,12 +186,11 @@ void B_FALL(){
  detachInterrupt(1);
  B_SIG=0;
  
- pulses_prev = pulses; //capture previous pulse count
+ pulses_prev = pulses;
  if(A_SIG==0)
- pulses++;//moving forward
+ pulses++;
  if(A_SIG==1)
- pulses--;//moving reverse
- //Serial.println(pulses);
+ pulses--;
  attachInterrupt(1, B_RISE, RISING);
 }
 
@@ -233,10 +205,7 @@ ISR(PCINT2_vect) {
   if ((currentTime - lastInterruptTime4 > debounceDelay)) {
     bool state4 = digitalRead(4);
     if (state4 == LOW && !button4Pressed) {
-      //Serial.println("TRANSMISSION");
       transmit_now = 1;
-      //morse_translate(To_Transmit);
-      //delay(dot_time);
       button4Pressed = 1;
      } else if (state4 == HIGH && button4Pressed) {
        button4Pressed = 0;
@@ -248,8 +217,6 @@ ISR(PCINT2_vect) {
    if ((currentTime - lastInterruptTime5 > debounceDelay)) {
      bool state5 = digitalRead(5);
      if (state5 == LOW && !button5Pressed) {
-      //Serial.println("BUTTON PRESSED");
-      Add_To_String();
       buttonState = 1;
       Letter_Entered = 1;
       button5Pressed = 1;
@@ -260,7 +227,6 @@ ISR(PCINT2_vect) {
   }
 }
 
-//do loop
 void loop() {
   //apply limits to the encoder scrolling through the keyboard
   if (pulses < -4){
@@ -285,24 +251,24 @@ void loop() {
 
   delay(5);
 
-  //debugging statements
-  //Serial.print("LetterEntered: \n");
-  //Serial.println(Letter_Entered);
-
-  //Serial.print("String: \n");
-  //Serial.println(To_Transmit);
-
-  // If letter was entered add the letter to To_Transmit and output it on the display
+  // If letter was entered add the letter to To_Transmit buffer and output it on the display
   if (Letter_Entered==1){
     if (Letters[New_Position] == '#'){
-      //Serial.println("SWITCHING KEYBOARDS");
       keyboard = !(keyboard);
       update_keys(keyboard);
 
       display.setCursor(3,0);
       display.setTextColor(BLACK);
       display.fillRect(0, 0, 128, 15, SSD1306_WHITE);
-      display.println(To_Transmit);
+
+      if (char_counter > 10){
+        String buffer = "";
+        buffer = To_Transmit.substring(To_Transmit.length() - MAX_VISIBLE_CHARS);
+        display.println(buffer);
+      } else {
+        display.println(To_Transmit);
+      }
+      
       display.display();
 
     } else {
@@ -314,8 +280,6 @@ void loop() {
       }
 
       char_counter++;
-      //Serial.print("char_counter: \n");
-      //Serial.print(char_counter);
 
       display.setCursor(3,0);
       display.setTextColor(BLACK);
@@ -323,19 +287,18 @@ void loop() {
       
       //scroll password to the left if the string size exceeds 10
       if (char_counter > 10){
-        //display.println(To_Transmit[char_counter]);
+        String buffer = "";
+        buffer = To_Transmit.substring(To_Transmit.length() - MAX_VISIBLE_CHARS);
+        display.println(buffer);
       } else {
         display.println(To_Transmit);
       }
     }
   } else if (transmit_now == 1) {
 
-    //------------------------------------------
-
-    Serial.println("Ahab: " + To_Transmit);
+    Serial.println(To_Transmit);
     To_Transmit="";
 
-    //------------------------------------------
     transmit_now = 0;
     char_counter=0;
   }
