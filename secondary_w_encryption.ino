@@ -1,17 +1,5 @@
-/*
- ______     __  __     ______     ______    
-/\  __ \   /\ \_\ \   /\  __ \   /\  == \   
-\ \  __ \  \ \  __ \  \ \  __ \  \ \  __<   
- \ \_\ \_\  \ \_\ \_\  \ \_\ \_\  \ \_____\ 
-  \/_/\/_/   \/_/\/_/   \/_/\/_/   \/_____/ 
-          Secondary // FourzeDotEXE
-*/
-
-/*
-THIS IS AN UNFINISHED, UNTESTED VERSION OF THE SECONDARY ARDUINO CODE.
-THIS CODE DOES NOT RUN ON ARDUINO, BUT CONTAINS THE CODE FOR ENCRYPTION AND
-DECRYPTION OF MESSAGES
-*/
+//Secondary - Controls the LoRa RYLR896 module and small OLED
+//FourzeDotEXE - 5/22/25
 
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -19,10 +7,9 @@ DECRYPTION OF MESSAGES
 #include <AESLib.h>
 #include <SoftwareSerial.h>
 
-#define SERIAL_BAUD 9600    // Serial baud rate
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 32 // Change to 64 if you have a 128x64 display
-#define INPUT_BUFFER_LIMIT (128 + 1)
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 32
+#define INPUT_BUFFER_LIMIT (128 + 1)  //max size for encryptable data at once
 
 SoftwareSerial lora(2, 3); // RX, TX for RYLR896
 
@@ -36,7 +23,7 @@ unsigned char ciphertext[2*INPUT_BUFFER_LIMIT] = {0}; // THIS IS OUTPUT BUFFER (
 // AES Encryption Key (YOU MUST GENERATE YOUR OWN FOR SECURITY)
 byte aes_key[] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
 
-// General initialization vector (same as in node-js example) (you must use your own IV's in production for full security!!!)
+// General initialization vector (you must use your own IV's in production for full security!!!)
 byte aes_iv[N_BLOCK] = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA };
 
 AESLib aesLib;
@@ -67,6 +54,7 @@ char morseMap[MORSE_TABLE_LEN]="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.";
 
 String To_Morse="";
 
+/*
 // Generate IV (once)
 void aes_init() {
   aesLib.gen_iv(aes_iv);
@@ -77,7 +65,7 @@ uint16_t encrypt_to_ciphertext(char * msg, uint16_t msgLen, byte iv[]) {
   Serial.println("Calling encrypt (string)...");
   // aesLib.get_cipher64_length(msgLen);
   int cipherlength = aesLib.encrypt((byte*)msg, msgLen, (byte*)ciphertext, aes_key, sizeof(aes_key), iv);
-                   // uint16_t encrypt(byte input[], uint16_t input_length, char * output, byte key[],int bits, byte my_iv[]);
+  // uint16_t encrypt(byte input[], uint16_t input_length, char * output, byte key[],int bits, byte my_iv[]);
   return cipherlength;
 }
 
@@ -87,6 +75,7 @@ uint16_t decrypt_to_cleartext(byte msg[], uint16_t msgLen, byte iv[]) {
   Serial.print("Decrypted bytes: "); Serial.println(dec_bytes);
   return dec_bytes;
 }
+*/
 
 void setup() {
   //set baud
@@ -98,7 +87,7 @@ void setup() {
   // Initialize the display
   if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for most OLEDs
     Serial.println(F("SSD1306 allocation failed"));
-    for (;;);
+    while(1);
   }
 
   //Initialize LoRa
@@ -111,7 +100,7 @@ void setup() {
 
   Serial.println("LoRa initialized");
 
-  aes_init(); // generate random IV, should be called only once? causes crash if repeated...
+  //aes_init(); // generate random IV, should be called only once? causes crash if repeated...
 
   //initialize secondary display
   display.clearDisplay();
@@ -178,6 +167,7 @@ byte enc_iv_from[N_BLOCK] = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0x
 
 uint16_t encLen = 0;
 
+/*
 //encrypt the contents of readBuffer using the shared key and iv
 String encryption_layer(unsigned char* readBuffer, int len){
   //Serial.print("readBuffer length: "); Serial.println(sizeof(readBuffer));
@@ -244,6 +234,7 @@ String decryption_layer(String hex_data){
   readBuffer = NULL;
 }
 
+
 String byteArrayToHex(const byte* data, int len) {
   String hex = "";
   for (int i = 0; i < len; i++) {
@@ -266,15 +257,16 @@ byte* hexToByteArray(String hex_data, byte* hex_decode, int out_len){
 
   return hex_decode;
 }
+*/
 
 String message = "";
 String received = "Peqd: ";
 String incoming = " ";
-
+unsigned int ignore_flag = 1;
 void loop() {
   
   // Receiving messages over LoRa
-  if (lora.available()) {
+  if (lora.available() && ignore_flag == 0) {
     incoming = lora.readStringUntil('\n');
     //Serial.println("Peqd: " + incoming);
 
@@ -306,8 +298,10 @@ void loop() {
 
   // Sending data over LoRa
   if (Serial.available()) { //first fetch data to be sent from serial input
-    message += lora.readStringUntil('\n');
+    message += Serial.readStringUntil('\n');
     message.trim();
+    String command = "";
+
 
     //generate command to send the message via RYLR896
     if (message.length() > 0){
@@ -325,9 +319,9 @@ void loop() {
       //String final_payload = encryption_layer(readBuffer, len);
 
       String final_payload = morse_translate(message);
-      String command = "AT+SEND=" + String(DEST_ADDR) + "," + String(final_payload.length()) + "," + final_payload;
-      lora.println(command);
+      command = "AT+SEND=" + String(DEST_ADDR) + "," + String(final_payload.length()) + "," + final_payload;
       Serial.println("Ahab: " + message);
+      ignore_flag = 1;
     }
 
     // Scroll existing lines up
@@ -345,8 +339,13 @@ void loop() {
       display.println(lines[i]);
     }
 
+    if (message.length() > 0 && ignore_flag == 1){
+      lora.println(command);
+    }
+
     display.display(); //display update
     message = "";
+    ignore_flag = 0;
   }
 
   delay(1000);  //induce delay to minimize data losses
