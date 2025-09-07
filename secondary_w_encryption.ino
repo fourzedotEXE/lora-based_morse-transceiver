@@ -92,9 +92,7 @@ void setup() {
 
   //Initialize LoRa
   lora.println("AT+ADDRESS=" + String(SELF_ADDR));
-  delay(100);
   lora.println("AT+NETWORKID=5");
-  delay(100);
   lora.println("AT+BAND=915000000");  //in line w/ FCC standards
   delay(100);
 
@@ -247,11 +245,7 @@ String byteArrayToHex(const byte* data, int len) {
 byte* hexToByteArray(String hex_data, byte* hex_decode, int out_len){
   //loop over each 2 hex chars
   for (int i = 0; i < out_len; i++) {
-    String byte_as_string = hex_data.substring((2*i), (2*i+2));  //ex: i = 1  -> hex_data.substring(2, 4) = 0xA4
-
-    //to convert to byte, use .c_str(), and then convert that to an unsigned long
-      //strtoul is only compatible with c-style strings
-    //then cast the long to a byte and add that to the proper index in the array
+    String byte_as_string = hex_data.substring((2*i), (2*i+2));
     hex_decode[i] = (byte)strtoul(byte_as_string.c_str(), nullptr, 16);  //add the newly decoded byte to the array
   }
 
@@ -269,7 +263,6 @@ void loop() {
   if (lora.available() && ignore_flag == 0) {
     incoming = lora.readStringUntil('\n');
     //Serial.println("Peqd: " + incoming);
-
     //String morse_data = decryption_layer(incoming);
 
     received += morse_reverse(incoming);
