@@ -92,9 +92,7 @@ void setup() {
 
   //Initialize LoRa
   lora.println("AT+ADDRESS=" + String(SELF_ADDR));
-  delay(100);
   lora.println("AT+NETWORKID=5");
-  delay(100);
   lora.println("AT+BAND=915000000");  //in line w/ FCC standards
   delay(100);
 
@@ -169,7 +167,7 @@ String encryption_layer(unsigned char* readBuffer, int len){
   //Serial.print("readBuffer length: "); Serial.println(sizeof(readBuffer));
   //Serial.print("readBuffer contents: "); Serial.println((char*)readBuffer);
 
-  // must not exceed INPUT                                                    9_BUFFER_LIMIT bytes; may contain a newline
+  // must not exceed INPUT_BUFFER_LIMIT bytes; may contain a newline
   sprintf((char*)cleartext, "%s", readBuffer);
 
   // Encrypt
