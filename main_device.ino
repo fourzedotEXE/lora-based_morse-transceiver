@@ -40,9 +40,7 @@ void aes_init() {
 
 uint16_t encrypt_to_ciphertext(char * msg, uint16_t msgLen, byte iv[]) {
   Serial.println("Calling encrypt (string)...");
-  // aesLib.get_cipher64_length(msgLen);
   int cipherlength = aesLib.encrypt((byte*)msg, msgLen, (byte*)ciphertext, aes_key, sizeof(aes_key), iv);
-                   // uint16_t encrypt(byte input[], uint16_t input_length, char * output, byte key[],int bits, byte my_iv[]);
   return cipherlength;
 }
 
@@ -66,9 +64,7 @@ void setup() {
 
   //Initialize LoRa
   lora.println("AT+ADDRESS=" + String(SELF_ADDR));
-  delay(100);
   lora.println("AT+NETWORKID=5");
-  delay(100);
   lora.println("AT+BAND=915000000");
   delay(100);
   
@@ -100,10 +96,12 @@ uint16_t encLen = 0;
 
 //encrypt the contents of readBuffer using the shared key and iv
 String encryption_layer(unsigned char* readBuffer, int len){
-  Serial.print("readBuffer length: "); Serial.println(sizeof(readBuffer));
-  Serial.print("readBuffer contents: "); Serial.println((char*)readBuffer);
+  Serial.print("readBuffer length: ");
+  Serial.println(sizeof(readBuffer));
+  Serial.print("readBuffer contents: ");
+  Serial.println((char*)readBuffer);
 
-  // must not exceed INPUT                                                    9_BUFFER_LIMIT bytes; may contain a newline
+  // must not exceed INPUT_BUFFER_LIMIT bytes; may contain a newline
   sprintf((char*)cleartext, "%s", readBuffer);
 
   // Encrypt
@@ -125,7 +123,7 @@ String encryption_layer(unsigned char* readBuffer, int len){
   Serial.println("---");
   memset(readBuffer, 0, len+1);
   free(readBuffer);
-  readBuffer = NULL;  // Optional but good practice to avoid dangling pointer
+  readBuffer = NULL;
 
   return hex_input;
 }
@@ -146,15 +144,19 @@ String decryption_layer(String hex_data){
   readBuffer = hexToByteArray(hex_data, readBuffer, out_len);
 
   //decrypt ciphertext
-  Serial.println("Encrypted. Decrypting..."); Serial.println(encLen ); Serial.flush();
+  Serial.println("Encrypted. Decrypting...");
+  Serial.println(encLen );
+  Serial.flush();
   
   unsigned char base64decoded[50] = {0};
   base64_decode((char*)base64decoded, (char*)ciphertext, encLen);
   
   memcpy(enc_iv, enc_iv_from, sizeof(enc_iv_from));
   uint16_t decLen = decrypt_to_cleartext(base64decoded, strlen((char*)base64decoded), enc_iv);
-  Serial.print("Decrypted cleartext of length: "); Serial.println(decLen);
-  Serial.print("Decrypted cleartext:\n"); Serial.println((char*)cleartext);
+  Serial.print("Decrypted cleartext of length: ");
+  Serial.println(decLen);
+  Serial.print("Decrypted cleartext:\n");
+  Serial.println((char*)cleartext);
 
   //free hex decoded bytes
   Serial.println("---");
@@ -176,11 +178,8 @@ String byteArrayToHex(const byte* data, int len) {
 byte* hexToByteArray(String hex_data, byte* hex_decode, int out_len){
   //loop over each 2 hex chars
   for (int i = 0; i < out_len; i++) {
-    String byte_as_string = hex_data.substring((2*i), (2*i+2));  //ex: i = 1  -> hex_data.substring(2, 4) = 0xA4
-
-    //to convert to byte, use .c_str(), and then convert that to an unsigned long
-      //strtoul is only compatible with c-style strings
-    //then cast the long to a byte and add that to the proper index in the array
+    String byte_as_string = hex_data.substring((2*i), (2*i+2));
+   
     hex_decode[i] = (byte)strtoul(byte_as_string.c_str(), nullptr, 16);  //add the newly decoded byte to the array
   }
 
@@ -202,7 +201,6 @@ void loop() {
     String decoded_payload = decryption_layer(incoming);
 
     //assume code here that translates message to audible morse(not in scope of proj.)
-
     Serial.println(decoded_payload);
   }
 
@@ -233,8 +231,6 @@ void loop() {
       String command = "AT+SEND=" + String(DEST_ADDR) + "," + String(final_payload.length()) + "," + final_payload;
       lora.println(command);
       Serial.println("Sent: " + final_payload);
-
-      //decryption_layer(readBuffer, len);
 
       inputText = "";
     }
